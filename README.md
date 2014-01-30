@@ -87,3 +87,9 @@ To exclude pages from the generated list, add to Pico config the setting `hide_p
 ```php
 $config['listresume_hide_pages'] = 'this/page,all/in/here/';
 ```
+
+To not generate link for folder :
+
+```php
+$config['listresume_create_folder_link] = false;
+```

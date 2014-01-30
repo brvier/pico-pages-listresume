@@ -27,6 +27,7 @@ class Pico_Pages_ListResume
 	{
 		$this->base_url = $settings['base_url'];
 		$this->hide_list = array_map('trim', explode(',', $settings['listresume_hide_pages']));
+		$this->create_folder_link = $settings['listresume_create_folder_link'];
 	}
 
 	/**
@@ -133,9 +134,14 @@ class Pico_Pages_ListResume
 
 			// use title if the page have one, and make a link if the page exists.
 			$item = !empty($page['title']) ? $page['title'] : $filename;
-			if(in_array($url, $this->pages_urls))
-				$item = '<a href="'.$url.'">'.$item.'</a>';
-
+			if(in_array($url, $this->pages_urls)) {
+				if ((array_key_exists('_childs', $page)) && ($this->create_folder_link===false)) {
+					$item = $item;
+					}
+				else {
+					$item = '<a href="'.$url.'">'.$item.'</a>';
+				}
+				}
 			// add the filename in class, and indicates if is current or parent
 			$class = $filename;
 			if($this->current_url == $url) $class .= ' is-current';
